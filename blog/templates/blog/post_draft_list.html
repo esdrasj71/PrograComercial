@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            {% if post.fecha_publicacion %}
+                <div class="date">
+                    {{ post.fecha_publicacion }}
+                </div>
+            {% else %}     
+                 <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publicar</a>
+            {% endif %}
+
+            <p class="date">created: {{ post.fecha_creacion|date:'d-m-Y' }}</p>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.titulo }}</a></h1>
+            <p>{{ post.texto|truncatechars:200 }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
